@@ -16,6 +16,19 @@ export default function storeReducer(store, action = {}) {
         ...store,
         people: people
       }
+      case 'load_vehicles':
+        const {vehicles} = action 
+        return{
+          ...store,
+          vehicles: vehicles
+        }
+        case 'load_planets':
+        const {planets} = action 
+        return{
+          ...store,
+          planets: planets
+        }
+
     case 'add_task':
 
       const { id, color } = action.payload
