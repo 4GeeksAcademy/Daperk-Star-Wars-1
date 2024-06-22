@@ -1,19 +1,36 @@
-import { CardItem } from "./CardItem"
+import React from 'react';
+import { CardItem } from "./CardItem";
+import { Link } from "react-router-dom";
+import useGlobalReducer from '../hooks/useGlobalReducer.jsx';
 
+export const PeopleCard = ({ person, img }) => {
+    const { dispatch, store } = useGlobalReducer();
+    const isFavorite = store.favorites.some(fav => fav.url === person.url);
 
-export const PeopleCard = ({person, img}) => {
-    return <CardItem img={img}>
-    <h5 class="card-title">{person.name}</h5>
-    <p>height: {person.height}</p>
-    <p>mass: {person.mass}</p>
-    <p>hair color: {person.hair_color}</p>
-    <div className="d-flex justify-content-between">
-        <button className="btn btn-primary">
-            Details
-        </button>
-        <button className="btn btn-warning">
-        <i className="fas fa-heart"></i>
-        </button>
-    </div>
-    </CardItem>
-}
+    const handleToggleFavorite = () => {
+        if (isFavorite) {
+            dispatch({ type: 'remove_favorite', payload: { url: person.url } });
+        } else {
+            dispatch({ type: 'add_favorite', payload: { favorite: { ...person, type: 'people' } } });
+        }
+    };
+
+    return (
+        <CardItem img={img}>
+            <h5 className="card-title">{person.name}</h5>
+            <p>Height: {person.height}</p>
+            <p>Mass: {person.mass}</p>
+            <p>Hair Color: {person.hair_color}</p>
+            <div className="d-flex justify-content-between">
+                <Link to={`/peopleDetails/${person.url.split("/")[5]}`}>
+                    <button className="btn btn-primary">
+                        Details
+                    </button>
+                </Link>
+                <button className="btn btn-warning" onClick={handleToggleFavorite}>
+                    <i className={`fas fa-heart ${isFavorite ? 'text-danger' : ''}`}></i>
+                </button>
+            </div>
+        </CardItem>
+    );
+};

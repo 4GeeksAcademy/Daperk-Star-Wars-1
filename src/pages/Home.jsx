@@ -43,7 +43,7 @@ export const Home = () => {
 			<div className="container">
 				<h1>Starships</h1>
 			<div className="scroll-container">
-				{store.vehicles.map(vehicles => <VehiclesCard vehicles={vehicles} img="https://placehold.co/600x400" />)}
+				{store.vehicles.map(vehicle => <VehiclesCard vehicle={vehicle} img="https://placehold.co/600x400" />)}
 			</div>
 			</div>
 			<div className="container">
