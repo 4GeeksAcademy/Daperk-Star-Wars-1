@@ -29,7 +29,7 @@ export const PlanetDetails = () => {
             if (isFavorite) {
                 dispatch({ type: 'remove_favorite', payload: { url: planet.url } });
             } else {
-                dispatch({ type: 'add_favorite', payload: { favorite: { ...planet, type: 'planets' } } });
+                dispatch({ type: 'add_favorite', payload: { favorite: { ...planet, type: 'planet' } } });
             }
         }
     };

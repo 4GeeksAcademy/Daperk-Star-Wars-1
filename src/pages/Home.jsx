@@ -22,8 +22,8 @@ export const Home = () => {
 					people: peopleBody.results
 				});
 				dispatch({
-					type:"load_planets",
-					planets: planetsBody.results
+					type:"load_planet",
+					planet: planetsBody.results
 				})
 				dispatch({
 					type: "load_vehicles",
@@ -49,7 +49,7 @@ export const Home = () => {
 			<div className="container">
 				<h1>Planets</h1>
 			<div className="scroll-container">
-				{store.planets.map(planets => <PlanetCard planets={planets} img="https://placehold.co/600x400" />)}
+				{store.planet.map(planet => <PlanetCard planet={planet} img="https://placehold.co/600x400" />)}
 			</div>
 			</div>
 		</>

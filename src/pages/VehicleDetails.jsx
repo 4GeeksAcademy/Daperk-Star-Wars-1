@@ -22,6 +22,19 @@ export const VehicleDetails = () => {
         };
         loadData();
     }, [id, dispatch]);
+    
+    const isFavorite = store.favorites.some(fav => fav.url === vehicle?.url);
+
+    const handleToggleFavorite = () => {
+        if (vehicle) {
+            if (isFavorite) {
+                dispatch({ type: 'remove_favorite', payload: { url: vehicle.url } });
+            } else {
+                dispatch({ type: 'add_favorite', payload: { favorite: { ...vehicle, type: 'vehicle' } } });
+            }
+        }
+    };
+
 
     if (!vehicle) return <div>Loading...</div>;
 
@@ -48,6 +61,9 @@ export const VehicleDetails = () => {
                                 <p>hyperdrive rating: {vehicle.hyperdrive_rating}</p>
                                 <p>MGLT: {vehicle.MGLT}</p>
                                 <p>starship class: {vehicle.starship_class}</p>
+                                <button className="btn btn-warning" onClick={handleToggleFavorite}>
+                                    <i className={`fas fa-heart ${isFavorite ? 'text-danger' : ''}`}></i> {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
+                                </button>
                             </div>
                         </div>
                     </div>

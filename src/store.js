@@ -3,7 +3,7 @@ export const initialStore = () => {
     favorites: [],
     people: [],
     vehicles: [],
-    planets: [],
+    planet: [],
     person: {},
     vehicle: {}
   }
@@ -23,11 +23,11 @@ export default function storeReducer(store, action = {}) {
         ...store,
         vehicles: vehicles
       }
-    case 'load_planets':
-      const { planets } = action
+    case 'load_planet':
+      const { planet } = action
       return {
         ...store,
-        planets: planets
+        planet: planet
       }
     case 'load_person':
       const { person } = action;
