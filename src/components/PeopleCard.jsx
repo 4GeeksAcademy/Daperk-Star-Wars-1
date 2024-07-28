@@ -9,9 +9,13 @@ export const PeopleCard = ({ person, img }) => {
 
     const handleToggleFavorite = () => {
         if (isFavorite) {
+            const updatedFavorites = store.favorites.filter(fav => fav.url !== person.url);
             dispatch({ type: 'remove_favorite', payload: { url: person.url } });
+            localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
         } else {
+            const updatedFavorites = [...store.favorites, { ...person, type: 'people' }];
             dispatch({ type: 'add_favorite', payload: { favorite: { ...person, type: 'people' } } });
+            localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
         }
     };
 

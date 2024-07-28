@@ -1,0 +1,7 @@
+.sticky-navbar {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1030; /* Ensure it appears above other content */
+    background-color: black; /* Make sure it has the same background color */
+}

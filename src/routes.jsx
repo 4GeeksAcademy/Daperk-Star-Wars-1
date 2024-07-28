@@ -12,6 +12,9 @@ import { Demo } from "./pages/Demo";
 import { PeopleDetails } from "./pages/PeopleDetails";
 import { VehicleDetails } from "./pages/VehicleDetails";
 import { PlanetDetails } from "./pages/PlanetDetails";
+import { People } from "./pages/People";
+import { Vehicles } from "./pages/Vehicles";
+import { Planets } from "./pages/Planets";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -31,6 +34,9 @@ export const router = createBrowserRouter(
         <Route path="/peopleDetails/:id" element={<PeopleDetails />} />
         <Route path="/vehicleDetails/:id" element={<VehicleDetails />} />
         <Route path="/planetDetails/:id" element={<PlanetDetails />} />
+        <Route path="/people" element={<People />} />
+        <Route path="/vehicles" element={<Vehicles />} />
+        <Route path="/planets" element={<Planets />} />
       </Route>
     )
 );

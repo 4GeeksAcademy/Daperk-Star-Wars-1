@@ -9,9 +9,13 @@ export const PlanetCard = ({ planet, img }) => {
 
     const handleToggleFavorite = () => {
         if (isFavorite) {
+            const updatedFavorites = store.favorites.filter(fav => fav.url !== planet.url);
             dispatch({ type: 'remove_favorite', payload: { url: planet.url } });
+            localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
         } else {
+            const updatedFavorites = [...store.favorites, { ...planet, type: 'planet' }];
             dispatch({ type: 'add_favorite', payload: { favorite: { ...planet, type: 'planet' } } });
+            localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
         }
     };
 

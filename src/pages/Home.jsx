@@ -9,29 +9,39 @@ export const Home = () => {
 
 	const { store, dispatch } = useGlobalReducer()
 	useEffect(() => {
-		const loadData = async () => {
-			const peopleResp = await fetch("https://swapi.dev/api/people")
-			const planetsResp = await fetch("https://swapi.dev/api/planets")
-			const vehiclesResp = await fetch("https://swapi.dev/api/starships")
-			if (peopleResp.ok && planetsResp && vehiclesResp) {
-				const peopleBody = await peopleResp.json();
-				const planetsBody = await planetsResp.json();
-				const vehiclesBody = await vehiclesResp.json();
-				dispatch({
-					type: "load_people",
-					people: peopleBody.results
-				});
-				dispatch({
-					type:"load_planet",
-					planet: planetsBody.results
-				})
-				dispatch({
-					type: "load_vehicles",
-					vehicles: vehiclesBody.results
-				})
-			}}
-			loadData()
-		})
+        const loadData = async () => {
+            const peopleResp = await fetch("https://swapi.dev/api/people");
+            const planetsResp = await fetch("https://swapi.dev/api/planets");
+            const vehiclesResp = await fetch("https://swapi.dev/api/starships");
+            if (peopleResp.ok && planetsResp.ok && vehiclesResp.ok) {
+                const peopleBody = await peopleResp.json();
+                const planetsBody = await planetsResp.json();
+                const vehiclesBody = await vehiclesResp.json();
+                dispatch({
+                    type: "load_people",
+                    people: peopleBody.results,
+                });
+                dispatch({
+                    type: "load_planet",
+                    planet: planetsBody.results,
+                });
+                dispatch({
+                    type: "load_vehicles",
+                    vehicles: vehiclesBody.results,
+                });
+            }
+        };
+
+        loadData();
+
+        // Load favorites from local storage
+        const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
+        dispatch({
+            type: "load_favorites",
+            favorites: savedFavorites,
+        });
+    }, [dispatch]);
+	
 	return (
 		<>
 			<div className="container">

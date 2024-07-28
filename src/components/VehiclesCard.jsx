@@ -7,12 +7,15 @@ import useGlobalReducer from '../hooks/useGlobalReducer.jsx';
 export const VehiclesCard = ({ vehicle, img }) => {
     const { dispatch, store } = useGlobalReducer();
     const isFavorite = store.favorites.some(fav => fav.url === vehicle.url);
-
     const handleToggleFavorite = () => {
         if (isFavorite) {
+            const updatedFavorites = store.favorites.filter(fav => fav.url !== vehicle.url);
             dispatch({ type: 'remove_favorite', payload: { url: vehicle.url } });
+            localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
         } else {
+            const updatedFavorites = [...store.favorites, { ...vehicle, type: 'vehicle' }];
             dispatch({ type: 'add_favorite', payload: { favorite: { ...vehicle, type: 'vehicle' } } });
+            localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
         }
     };
 
